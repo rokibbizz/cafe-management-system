@@ -1,22 +1,34 @@
 package com.rokib.cafe.presentation.api;
 
 import com.rokib.cafe.application.usecase.IUserUseCase;
+import com.rokib.cafe.domain.dto.user.UserDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/v1/user")
+@RequiredArgsConstructor
 public class UserController {
-    @Autowired
-    private IUserUseCase userUseCase;
-    @PostMapping(path = "/signup")
-    public ResponseEntity<String> signUp(@RequestBody Map<String,String> requestMap){
-       return userUseCase.signUp(requestMap);
+
+    private final IUserUseCase userUseCase;
+
+    @GetMapping("/hello")
+    public String hello(){
+        return "from auth";
     }
+    @GetMapping("/users")
+    public ResponseEntity<List<UserDTO>> gellAllUser(){
+        return userUseCase.gellAllUser();
+    }
+
+    @PostMapping("/activateuser")
+    public ResponseEntity<String> activateUser(@RequestBody(required = true) Map<String,String> requestMap){
+        return userUseCase.activateUser(requestMap);
+    }
+
 }

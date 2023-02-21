@@ -1,12 +1,14 @@
 package com.rokib.cafe.application.usecase;
 
+import com.rokib.cafe.domain.dto.user.UserDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 
-@Component
 public interface IUserUseCase {
+    ResponseEntity<List<UserDTO>> gellAllUser();
 
-    ResponseEntity<String> signUp(Map<String, String> requestMap);
+    ResponseEntity<String> activateUser(Map<String, String> requestMap);
 }
