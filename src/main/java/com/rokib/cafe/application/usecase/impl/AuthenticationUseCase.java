@@ -85,4 +85,20 @@ public class AuthenticationUseCase implements IAuthenticationUseCase {
             return new ResponseEntity<String>("User Not Found", HttpStatus.BAD_REQUEST);
         }
     }
+
+    @Override
+    public ResponseEntity<String> forgotPassword(Map<String, String> requestMap) {
+        Optional<Object> user = repository.findByEmail(requestMap.get("email"));
+        if (user.isPresent()) {
+            User dbUser = (User) user.get();
+            if(!dbUser.getPassword().equals(requestMap.get("oldPassword"))){
+                return new ResponseEntity<String>("Old Password And Confirm Password Did Not Matched", HttpStatus.BAD_REQUEST);
+            }
+            dbUser.setPassword(passwordEncoder.encode(requestMap.get("newpPassword")));
+            repository.save(dbUser);
+            return new ResponseEntity<String>("Password Changed Successfully", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("User Not Found", HttpStatus.BAD_REQUEST);
+        }
+    }
 }

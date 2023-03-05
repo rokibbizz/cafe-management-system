@@ -3,7 +3,6 @@ package com.rokib.cafe.presentation.api;
 import com.rokib.cafe.application.usecase.IUserUseCase;
 import com.rokib.cafe.domain.dto.user.UserDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

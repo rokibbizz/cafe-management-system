@@ -15,14 +15,14 @@ import java.util.List;
 
 @NamedQuery(name = "User.gellAllUser",query = "select new com.rokib.cafe.domain.dto.user.UserDTO(u.id,u.firstname,u.lastname,u.contactNumber,u.email,u.status) from User u where u.role='user'")
 
-@NamedQuery(name = "User.gellAllAdmin",query = "select u.email from User where u.role='admin'")
+@NamedQuery(name = "User.gellAllAdmin",query = "select u.email from User u where u.role='admin'")
+
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class User implements Serializable, UserDetails {
-    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

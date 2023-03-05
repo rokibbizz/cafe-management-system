@@ -22,23 +22,27 @@ public class AuthenticationController {
     private final IAuthenticationUseCase service;
 
     @PostMapping("/signup")
-    public ResponseEntity<AuthenticationResponse> register(
-            @RequestBody RegisterRequest request
-    ) {
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) {
         return ResponseEntity.ok(service.register(request));
     }
+
     @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> authenticate(
-            @RequestBody AuthenticationRequest request
-    ) {
+    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
         return ResponseEntity.ok(service.authenticate(request));
     }
 
-    @PostMapping("/changePassword")
-    public ResponseEntity<String> changePassword(
-            @RequestBody Map<String,String> requestMap
-    ) {
+    @PostMapping("/checkToken")
+    public ResponseEntity<String> checkToken(@RequestBody Map<String, String> requestMap) {
         return service.changePassword(requestMap);
+    }
+
+    @PostMapping("/changePassword")
+    public ResponseEntity<String> changePassword(@RequestBody Map<String, String> requestMap) {
+        return service.changePassword(requestMap);
+    }
+    @PostMapping("/forgotPassword")
+    public ResponseEntity<String> forgotPassword(@RequestBody Map<String, String> requestMap) {
+        return service.forgotPassword(requestMap);
     }
 
 
